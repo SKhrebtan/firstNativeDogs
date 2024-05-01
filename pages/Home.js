@@ -50,14 +50,7 @@ const Home = ({navigation}) => {
         data={narrowData}
         renderItem={({ item, index }) => (
           <TouchableOpacity onPress={()=>navigation.navigate('DogDetails',{id:item.id})}>
-            <OneDog dog={item} key={item.id}/>
-          {/* <View style={styles.card}> 
-            <Image source={{ uri: item.image }} style={styles.image} />
-            <Text>Name: {item.name}</Text>
-            <Text>Breed: {item.breed}</Text>
-            <AntDesign name='heart' size={28} color='red'/>
-            <AntDesign name='hearto' size={28} color='black'/>
-          </View> */}
+            <OneDog dog={item} key={item.id}/>       
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id}

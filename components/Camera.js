@@ -5,6 +5,7 @@ import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from 'expo-file-system';
 import { useDispatch } from "react-redux"
 import { updateAvatar } from "../redux/auth/operations";
+import { MaterialIcons } from '@expo/vector-icons';
 export default function CustomCamera({setShowCamera,setShowEnum}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
@@ -38,21 +39,22 @@ export default function CustomCamera({setShowCamera,setShowEnum}) {
         // style={styles.photoView}
         >
           <TouchableOpacity
+          style={{position:'absolute',top:15, left:15}}
             // style={styles.flipContainer}
             onPress={() => {
               setType(
                 type === Camera.Constants.Type.front
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
+                  ? Camera.Constants.Type.back
+                  : Camera.Constants.Type.front
               );
             }}
           >
-            <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
-              Flip
-            </Text>
+            <View >
+            <MaterialIcons name="flip-camera-ios" size={50} color="black" />
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.button}
+            style={{position:'absolute',top:15, right:15}}
             onPress={async () => {
               if (cameraRef) {
                 const { uri } = await cameraRef.takePictureAsync();
@@ -84,9 +86,11 @@ export default function CustomCamera({setShowCamera,setShowEnum}) {
 const styles = StyleSheet.create({
   container: {
     //  flex: 1,
+    position:'relative',
      width: 200
      },
   camera: { 
+    position:'relative',
     height:400,
     width: 320
  },

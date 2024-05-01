@@ -46,7 +46,7 @@ const selectImage = async () => {
         {user.name}
     </Text>
                 {!showEnum && <Image source={{ uri: user.avatar }} style={styles.image} />}
-                {showEnum ?<Button title='Cancel' onPress={()=>setShowEnum(false)}/>:<Button title='Change Avatar' onPress={()=>setShowEnum(true)}/>}
+                {showEnum ?<Button title='Cancel' onPress={()=>{setShowEnum(false);setShowCamera(false)}}/>:<Button title='Change Avatar' onPress={()=>setShowEnum(true)}/>}
                 {showEnum && <View style={{display:'flex',flexDirection:'row',gap:15}}><Button title='Upload' onPress={selectImage}/><Button title='Camera' onPress={()=>{setShowCamera(!showCamera)}}/></View>}
         {showCamera&&<CustomCamera setShowCamera={setShowCamera} setShowEnum={setShowEnum}/>}
 </View></ScrollView>
