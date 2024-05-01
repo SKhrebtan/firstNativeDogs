@@ -13,7 +13,8 @@ import {
   registerUser,
   loginUser,
   logOut,
-  refreshUser
+  refreshUser,
+  updateAvatar
 } from './operations';
 
 const authSlice = createSlice({
@@ -30,6 +31,17 @@ const authSlice = createSlice({
 
   extraReducers: (builder) =>
     builder
+    .addCase(updateAvatar.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(updateAvatar.fulfilled, (state,action) => {
+      state.isLoading = false;
+      state.user.avatar = action.payload.avatar
+    })
+    .addCase(updateAvatar.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    })
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
       })

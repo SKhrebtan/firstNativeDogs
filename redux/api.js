@@ -13,7 +13,7 @@ export const clearToken = () => {
 };
 
 export async function register(body) {
- 
+  setToken(data.token); 
   const { data } = await nativeApi.post('/user', body);
   return data;
 }
@@ -37,4 +37,11 @@ export async function refresh(token) {
     data: { user },
   } = await nativeApi('/auth/profile');
   return user;
+}
+export async function avatar(file) {
+  const { data } = await nativeApi.patch("/auth/avatar", file,{
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  }},);
+  return data
 }

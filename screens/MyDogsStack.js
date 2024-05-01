@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 
 const MyDogsStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName='AllMyDogs'>
       <Stack.Screen name="AllMyDogs" component={MyDogsPage} options={{
             headerShown: false
           }}/>

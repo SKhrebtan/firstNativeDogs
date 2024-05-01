@@ -20,7 +20,6 @@ export const OneDog = ({ dog, my }) => {
   const [myDog, setMyDog] = useState(null);
   const [addDog, { isLoading: isAddLoading }] = useAddDogMutation();
   const [deleteDog, { isLoading: isDeleteLoading }] = useDeleteDogMutation();
-  console.log();
   const { data: myDogs } = useGetDogsQuery();
 
   const spinValue = useRef(new Animated.Value(0)).current;
