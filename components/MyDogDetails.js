@@ -7,18 +7,14 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import {
-  useGetOneDogFromAllQuery,
-  useGetOneDogQuery,
-} from '../redux/dogs/dogsReducer';
+import { useGetOneDogQuery } from '../redux/dogs/dogsReducer';
 import { useNavigation } from '@react-navigation/native';
-import { useState, useEffect } from 'react';
-export default function DogDetails() {
-  const [dog, setDog] = useState(null);
+
+export default function MyDogDetails() {
   const {
     params: { id, my },
   } = useRoute();
-  const { data, isLoading } = useGetOneDogFromAllQuery(id);
+  const { data, isLoading, error } = useGetOneDogQuery(id);
 
   const navigation = useNavigation();
   return isLoading ? (
@@ -29,8 +25,8 @@ export default function DogDetails() {
     data && (
       <View style={styles.container}>
         <Button
-          title="Back to Home"
-          onPress={() => navigation.navigate('Home')}
+          title="Back to my dogs"
+          onPress={() => navigation.navigate('AllMyDogs')}
         />
         <View style={styles.card}>
           <Image source={{ uri: data.image }} style={styles.image} />

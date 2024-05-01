@@ -8,6 +8,7 @@ import {
   TextInput,
   Keyboard,
   Platform,
+  ActivityIndicator
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState,useEffect } from 'react';
@@ -16,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
   const dispatch = useDispatch()
-  const {token} = useSelector(state=>state.auth)
+  const {token,isLoading, error} = useSelector(state=>state.auth)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
@@ -31,7 +32,12 @@ const Login = () => {
   if(!token) return;
   navigation.navigate('Home')
  },[token])
-  return (
+  return isLoading ?  
+  <View style={styles.container}>
+  <ActivityIndicator size="large" color="#00ff00" />
+ </View>
+   :
+   (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <Text>Login Screen</Text>
@@ -54,6 +60,7 @@ const Login = () => {
                 secureTextEntry
                 style={styles.input}
               />
+              {error && <Text style={styles.errorText}>Invalid email or password</Text>}
               <Button
                 title="Login"
                 style={styles.input}
@@ -82,13 +89,18 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
   },
   input: {
-    width: 200,
+    width: 240,
     height: 44,
     padding: 10,
     borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,
   },
+  errorText:{
+color: 'red',
+fontSize: 20,
+marginBottom: 10
+  }
 });
 
 export default Login;

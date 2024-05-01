@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import DogDetails from '../components/DogDetails'; 
-import CustomHeader from '../components/Header'
 import { MyDogsPage } from '../pages/MyDogs';
+import CustomHeader from '../components/Header'
+import MyDogDetails from '../components/MyDogDetails';
 const Stack = createStackNavigator();
 
 const MyDogsStack = () => {
@@ -10,7 +10,7 @@ const MyDogsStack = () => {
       <Stack.Screen name="AllMyDogs" component={MyDogsPage} options={{
             headerShown: false
           }}/>
-      <Stack.Screen name="DogDetails" component={DogDetails} options={{
+      <Stack.Screen name="MyDogDetails" component={MyDogDetails} options={{
             headerShown: false
           }}/>
     </Stack.Navigator>

@@ -8,7 +8,6 @@ const Drawer = createDrawerNavigator();
 
 export const MyDrawer = () => {
     const {token} = useSelector(state=>state.auth)
-    console.log(token)
   return (
     <Drawer.Navigator>
       <Drawer.Screen

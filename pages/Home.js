@@ -1,11 +1,12 @@
 import React, { useState,useEffect,useRef } from "react";
 import { View, Text, StyleSheet,FlatList, Image,ActivityIndicator,Animated,TouchableOpacity } from "react-native";
 import Reanimated, {LightSpeedInRight, LightSpeedOutRight} from 'react-native-reanimated';
-import { useGetAllDogsQuery } from "../redux/dogs/dogsReducer";
+import { useGetAllDogsQuery, useGetDogsQuery } from "../redux/dogs/dogsReducer";
 import InfiniteScrollView from 'react-native-infinite-scroll-view';
 import { useSelector,useDispatch } from "react-redux";
 import { setIsModalOpen } from "../redux/status/statusSlice";
-
+import { AntDesign } from '@expo/vector-icons';
+import { OneDog } from "../components/OneDog";
 const Home = ({navigation}) => {
   const [pages, setPages] = useState(1)
   const dispatch = useDispatch()
@@ -17,6 +18,8 @@ const Home = ({navigation}) => {
     pages,
     itemsPerPage,
   });
+
+
   useEffect(() => {
     if (!data?.dogs) return;
     setNarrowData((prevData) => [...prevData, ...data.dogs]);
@@ -47,11 +50,14 @@ const Home = ({navigation}) => {
         data={narrowData}
         renderItem={({ item, index }) => (
           <TouchableOpacity onPress={()=>navigation.navigate('DogDetails',{id:item.id})}>
-          <View style={styles.card}> 
+            <OneDog dog={item} key={item.id}/>
+          {/* <View style={styles.card}> 
             <Image source={{ uri: item.image }} style={styles.image} />
             <Text>Name: {item.name}</Text>
             <Text>Breed: {item.breed}</Text>
-          </View>
+            <AntDesign name='heart' size={28} color='red'/>
+            <AntDesign name='hearto' size={28} color='black'/>
+          </View> */}
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id}
